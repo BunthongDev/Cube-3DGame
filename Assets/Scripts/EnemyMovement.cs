@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 using UnityEngine.AI;
@@ -12,10 +13,16 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField]
     private float distance = 30;
 
+    // control animation
+    private Animator animator;
+    
+    
+    
     private void Start()
     {
         enemyAgent = GetComponent<NavMeshAgent>();
         playerMovement = FindFirstObjectByType<PlayerController>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -28,7 +35,9 @@ public class EnemyMovement : MonoBehaviour
             {
                 enemyAgent.SetDestination(playerMovement.transform.position);
             }
-
+            
+            float speed = enemyAgent.velocity.magnitude;
+            animator.SetFloat("Blend", speed);
         }
     }
 }
