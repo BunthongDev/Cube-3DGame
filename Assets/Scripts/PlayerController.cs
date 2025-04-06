@@ -73,7 +73,9 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(moveDirection);
         }
 
-    
+        //play animation using blendtree 
+        animator.SetFloat("Blend", moveAmount);
+        
     }
     
     [SerializeField] private Text labelScore;
